@@ -8,7 +8,8 @@ package com.evoluti.java.junit;
 import java.util.Map;
 import java.util.Optional;
 import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -18,25 +19,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ActionTest {
 
     private String CLIENT_ID;
+    private String SO;
 
     @BeforeEach
     @DisplayName("Inicializando configuração")
     @Order(1)
     public void configuraTeste() {
-        String txt = getEnvParam("OS");
-        System.out.println(txt);
-
+        SO = getEnvParam("OS");
         CLIENT_ID = getEnvParam("CLIENT_ID");
     }
 
     @Test
-    @DisplayName("Testar variaveis de ambiente")
+    @DisplayName("Exibir variaveis")
     @Order(2)
-    void testaConfig() {
-        String windowsNt = getEnvParam("OS");
-        System.out.println("CLIENT_ID:");
+    void exibeConfig() {
+        System.out.println(SO);
         System.out.println(CLIENT_ID);
-        assertEquals("Windows_NT", windowsNt);
+    }
+
+
+    @Test
+    @DisplayName("Testar variaveis de ambiente")
+    @Order(3)
+    void testaConfig() {
+        SO = getEnvParam("OS");
+        assertFalse(SO.isBlank());
     }
 
     public String getEnvParam(final String param) {
