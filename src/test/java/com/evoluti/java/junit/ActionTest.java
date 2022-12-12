@@ -43,7 +43,7 @@ public class ActionTest {
     @Order(3)
     void testaConfig() {
         SO = getEnvParam("OS");
-        assertFalse(SO.isBlank());
+        assertFalse(SO != null);
     }
 
     public String getEnvParam(final String param) {
