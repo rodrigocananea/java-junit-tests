@@ -22,6 +22,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
         env:
           ENV_SECRET: ${{ secrets.ENV_SECRET }}
+      - name: Criando arquivo env local
         run: echo $ENV_SECRET > .env
       - name: Run tests with Maven
         run: mvn -B test --file pom.xml
