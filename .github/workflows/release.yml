@@ -21,6 +21,8 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
         env:
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          ENV_SECRET: ${{ secrets.ENV_SECRET }}
+        run: |
+          echo $ENV_SECRET > .env
       - name: Run tests with Maven
         run: mvn -B test --file pom.xml

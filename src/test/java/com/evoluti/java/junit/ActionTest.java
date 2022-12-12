@@ -19,21 +19,19 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ActionTest {
 
     private String CLIENT_ID;
-    private String SO;
 
     @BeforeEach
     @DisplayName("Inicializando configuração")
     @Order(1)
-    public void configuraTeste() {
-        SO = getEnvParam("OS");
-        CLIENT_ID = getEnvParam("CLIENT_ID");
+    public void configuraTeste() throws Exception {
+        EnvUtil.init();
+        CLIENT_ID = EnvUtil.getProperty("CLIENT_ID");
     }
 
     @Test
     @DisplayName("Exibir variaveis")
     @Order(2)
     void exibeConfig() {
-        System.out.println(SO);
         System.out.println(CLIENT_ID);
     }
 
@@ -42,8 +40,8 @@ public class ActionTest {
     @DisplayName("Testar variaveis de ambiente")
     @Order(3)
     void testaConfig() {
-        SO = getEnvParam("OS");
-        assertFalse(SO != null);
+        CLIENT_ID = EnvUtil.getProperty("CLIENT_ID");
+        assertTrue(CLIENT_ID != null);
     }
 
     public String getEnvParam(final String param) {
